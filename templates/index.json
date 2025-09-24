@@ -1,23 +1,7 @@
 {
   "sections": {
-    "hero": {
-      "type": "simple-fallback",
-      "settings": {
-        "heading": "New Arrivals",
-        "cta_label": "Shop now",
-        "cta_link": "/collections/all"
-      }
-    },
-    "feat": {
-      "type": "featured-collection-safe",
-      "settings": {
-        "title": "Featured",
-        "show_view_all": true
-      }
-    }
+    "hero": { "type": "simple-fallback", "settings": { "heading": "New Arrivals", "cta_label": "Shop now", "cta_link": "/collections/all" } },
+    "feat": { "type": "featured-collection-safe", "settings": { "title": "Featured", "show_view_all": true } }
   },
-  "order": [
-    "hero",
-    "feat"
-  ]
+  "order": ["hero", "feat"]
 }
