@@ -1,15 +1,9 @@
-{%- comment -%}
-  Featured collection section with robust fallbacks.
-  - If no collection is selected: falls back to collections['all'] or first available collection.
-  - If collection has no products: renders balanced placeholders.
-{%- endcomment -%}
-
+{% comment %}
+Featured collection (safe): falls back if no collection is selected or empty, and shows placeholders.
+{% endcomment %}
 {%- liquid
   assign products_to_display = section.settings.products_to_show | default: 8
   assign columns_desktop = section.settings.columns_desktop | default: 4
-  assign show_view_all = section.settings.show_view_all
-  assign title = section.settings.title
-
   assign picked_collection = section.settings.collection
   if picked_collection == blank
     assign picked_collection = collections['all']
@@ -20,7 +14,6 @@
       break
     endfor
   endif
-
   assign collection_for_grid = picked_collection
   assign has_products = false
   if collection_for_grid and collection_for_grid.products_count > 0
@@ -30,25 +23,23 @@
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
-    <div class="title-wrapper-with-link{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {%- if title != blank -%}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}">{{ title }}</h2>
-      {%- endif -%}
-      {%- if show_view_all and collection_for_grid and collection_for_grid.url -%}
+    <div class="title-wrapper-with-link">
+      {% if section.settings.title != blank %}
+        <h2 class="title inline-richtext {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.show_view_all and collection_for_grid and collection_for_grid.url %}
         <a href="{{ collection_for_grid.url }}" class="link underlined-link">
           {{ 'sections.featured_collection.view_all' | t }}
         </a>
-      {%- endif -%}
+      {% endif %}
     </div>
 
-    {%- if has_products -%}
+    {% if has_products %}
       {%- paginate collection_for_grid.products by products_to_display -%}
-        <ul id="Slider-{{ section.id }}"
-            class="grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ columns_desktop }}-col-desktop">
+        <ul id="Slider-{{ section.id }}" class="grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ columns_desktop }}-col-desktop">
           {%- for product in collection_for_grid.products -%}
             {%- assign lazy_load = forloop.index > 2 -%}
-            <li class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+            <li class="grid__item">
               {% render 'card-product',
                 card_product: product,
                 media_aspect_ratio: section.settings.image_ratio,
@@ -59,11 +50,10 @@
           {%- endfor -%}
         </ul>
       {%- endpaginate -%}
-    {%- else -%}
+    {% else %}
       <ul class="grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ columns_desktop }}-col-desktop">
         {%- for i in (1..columns_desktop) -%}
-          <li class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-              {% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+          <li class="grid__item">
             {% assign ridx = forloop.rindex %}
             {% case ridx %}
               {% when 5 %}{% assign ridx = 1 %}
@@ -79,7 +69,7 @@
           </li>
         {%- endfor -%}
       </ul>
-    {%- endif -%}
+    {% endif %}
   </div>
 </div>
 
@@ -94,27 +84,22 @@
     { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 24, "step": 2, "default": 8 },
     { "type": "select", "id": "columns_desktop", "label": "Columns on desktop",
       "options": [{"value":"2","label":"2"},{"value":"3","label":"3"},{"value":"4","label":"4"}],
-      "default": "4"
-    },
+      "default": "4" },
     { "type": "select", "id": "columns_mobile", "label": "Columns on mobile",
       "options": [{"value":"1","label":"1"},{"value":"2","label":"2"}],
-      "default": "2"
-    },
+      "default": "2" },
     { "type": "select", "id": "image_ratio", "label": "Image ratio",
       "options": [{"value":"adapt","label":"Adapt to image"},{"value":"square","label":"Square"},{"value":"portrait","label":"Portrait"}],
-      "default": "adapt"
-    },
+      "default": "adapt" },
     { "type": "select", "id": "image_shape", "label": "Image shape",
       "options": [{"value":"default","label":"Default"},{"value":"arch","label":"Arch"}],
-      "default": "default"
-    },
+      "default": "default" },
     { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
     { "type": "checkbox", "id": "show_view_all", "label": "Show view all", "default": true },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "select", "id": "heading_size", "label": "Heading size",
       "options": [{"value":"h2","label":"H2"},{"value":"h1","label":"H1"},{"value":"h0","label":"Display"}],
-      "default": "h1"
-    }
+      "default": "h1" }
   ],
   "presets": [{ "name": "Featured collection (safe)" }]
 }
