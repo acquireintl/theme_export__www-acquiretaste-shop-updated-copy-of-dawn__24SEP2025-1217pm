@@ -1,1 +1,36 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {
+        "back_collection": ""
+      }
+    },
+    "simple_fallback_iK6qr6": {
+      "type": "simple-fallback",
+      "name": "Simple fallback",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "cta_label": "",
+        "cta_link": "",
+        "heading_size": "h1",
+        "color_scheme": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "simple_fallback_iK6qr6"
+  ]
+}
