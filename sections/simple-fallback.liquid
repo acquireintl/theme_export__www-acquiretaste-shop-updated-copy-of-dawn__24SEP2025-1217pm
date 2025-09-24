@@ -11,13 +11,9 @@
     </div>
 
     {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
-      <div class="center">
-        <a class="button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
-      </div>
+      <div class="center"><a class="button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a></div>
     {% else %}
-      <div class="center">
-        <a class="button button--secondary" href="/collections/all">Shop all</a>
-      </div>
+      <div class="center"><a class="button button--secondary" href="/collections/all">Shop all</a></div>
     {% endif %}
   </div>
 </div>
