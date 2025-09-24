@@ -46,61 +46,6 @@
                 <div class="card" style="padding:1.25rem;">
                   {% if icon != blank %}
                     <div class="media" style="margin-bottom:.75rem;">
-                      <img src="{{ icon | image_url:_
-
-
-
-git checkout -b fix/values-icons-img
-
-cat > sections/about-modular.liquid <<'LIQUID'
-{% comment %} About — Modular (Luxury v2.1, robust values icons) {% endcomment %}
-<section class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="page-width section-{{ section.id }}-padding">
-    {% for block in section.blocks %}
-      {% case block.type %}
-
-        {% when 'hero' %}
-          <div class="grid grid--1-col grid--2-col-tablet items-center gap">
-            <div class="prose">
-              {% if block.settings.eyebrow != blank %}<p class="eyebrow">{{ block.settings.eyebrow }}</p>{% endif %}
-              {% if block.settings.heading != blank %}<h1 class="title h0">{{ block.settings.heading }}</h1>{% endif %}
-              {% if block.settings.subheading != blank %}<p class="subtitle">{{ block.settings.subheading }}</p>{% endif %}
-              {% if block.settings.cta_label != blank and block.settings.cta_link != blank %}
-                <a class="button" href="{{ block.settings.cta_link }}">{{ block.settings.cta_label }}</a>
-              {% endif %}
-            </div>
-            <div>
-              {% assign img_d = block.settings.image_desktop %}
-              {% assign img_m = block.settings.image_mobile | default: img_d %}
-              {% if img_d != blank %}
-                <picture>
-                  {% if img_m != blank %}
-                    <source media="(max-width: 749px)" srcset="{{ img_m | image_url: width: 750 }}">
-                  {% endif %}
-                  {{ img_d | image_url: width: 1500 | image_tag: loading: 'lazy', alt: block.settings.heading }}
-                </picture>
-              {% endif %}
-            </div>
-          </div>
-
-        {% when 'story' %}
-          <div class="rte" style="max-width: 72ch; margin: 0 auto;">
-            {{ block.settings.body }}
-          </div>
-
-        {% when 'values' %}
-          <div class="grid grid--1-col grid--3-col-tablet">
-            {% for i in (1..6) %}
-              {% assign icon_key = 'icon_' | append: i %}
-              {% assign title_key = 'title_' | append: i %}
-              {% assign copy_key  = 'copy_'  | append: i %}
-              {% assign icon  = block.settings[icon_key] %}
-              {% assign title = block.settings[title_key] %}
-              {% assign copy  = block.settings[copy_key]  %}
-              {% if icon != blank or title != blank or copy != blank %}
-                <div class="card" style="padding:1.25rem;">
-                  {% if icon != blank %}
-                    <div class="media" style="margin-bottom:.75rem;">
                       <img src="{{ icon | image_url: width: 256 }}" alt="{{ title | escape }}" loading="lazy" width="256" height="256" style="max-width:128px;height:auto;">
                     </div>
                   {% endif %}
