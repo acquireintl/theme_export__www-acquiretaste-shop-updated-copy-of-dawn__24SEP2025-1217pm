@@ -1,23 +1,21 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
-
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
-  }
-</style>
-
 <div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+  <h1 class="title">{{ 'templates.404.title' | t }}</h1>
+  <p class="subtitle">{{ 'templates.404.subtext' | t }}</p>
+
+  {%- assign back_collection = section.settings.back_collection -%}
+  {%- assign back_url = routes.all_products_collection_url -%}
+  {%- if back_collection and back_collection.url -%}
+    {%- assign back_url = back_collection.url -%}
+  {%- endif -%}
+
+  <a href="{{ back_url }}" class="button">{{ 'general.continue_shopping' | t }}</a>
 </div>
+
+{% schema %}
+{
+  "name": "t:sections.main-404.name",
+  "settings": [
+    { "type": "collection", "id": "back_collection", "label": "Fallback collection" }
+  ]
+}
+{% endschema %}
