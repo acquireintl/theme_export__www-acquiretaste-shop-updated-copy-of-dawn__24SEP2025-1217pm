@@ -1,6 +1,4 @@
-{% comment %}
-Featured collection (safe): falls back if no collection is selected or empty, and shows placeholders.
-{% endcomment %}
+{%- comment -%} Featured collection (safe) {%- endcomment -%}
 {%- liquid
   assign products_to_display = section.settings.products_to_show | default: 8
   assign columns_desktop = section.settings.columns_desktop | default: 4
@@ -23,47 +21,37 @@ Featured collection (safe): falls back if no collection is selected or empty, an
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
-    <div class="title-wrapper-with-link">
-      {% if section.settings.title != blank %}
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
-      {% endif %}
-      {% if section.settings.show_view_all and collection_for_grid and collection_for_grid.url %}
-        <a href="{{ collection_for_grid.url }}" class="link underlined-link">
-          {{ 'sections.featured_collection.view_all' | t }}
-        </a>
-      {% endif %}
-    </div>
+    {% if section.settings.title != blank %}
+      <h2 class="title inline-richtext {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+    {% endif %}
 
     {% if has_products %}
       {%- paginate collection_for_grid.products by products_to_display -%}
-        <ul id="Slider-{{ section.id }}" class="grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ columns_desktop }}-col-desktop">
-          {%- for product in collection_for_grid.products -%}
-            {%- assign lazy_load = forloop.index > 2 -%}
-            <li class="grid__item">
-              {% render 'card-product',
-                card_product: product,
-                media_aspect_ratio: section.settings.image_ratio,
-                image_shape: section.settings.image_shape,
-                show_vendor: section.settings.show_vendor,
-                lazy_load: lazy_load %}
-            </li>
-          {%- endfor -%}
-        </ul>
+      <ul class="grid product-grid grid--{{ section.settings.columns_mobile | default: '2' }}-col-tablet-down grid--{{ columns_desktop }}-col-desktop">
+        {%- for product in collection_for_grid.products -%}
+          {%- assign __lazy = false -%}{% if forloop.index > 2 %}{%- assign __lazy = true -%}{% endif %}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: section.settings.image_ratio,
+              image_shape: section.settings.image_shape,
+              show_vendor: section.settings.show_vendor,
+              lazy_load: __lazy %}
+          </li>
+        {%- endfor -%}
+      </ul>
       {%- endpaginate -%}
     {% else %}
-      <ul class="grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ columns_desktop }}-col-desktop">
+      <ul class="grid product-grid grid--{{ section.settings.columns_mobile | default: '2' }}-col-tablet-down grid--{{ columns_desktop }}-col-desktop">
         {%- for i in (1..columns_desktop) -%}
           <li class="grid__item">
             {% assign ridx = forloop.rindex %}
-            {% case ridx %}
-              {% when 5 %}{% assign ridx = 1 %}
-              {% when 6 %}{% assign ridx = 2 %}
-            {% endcase %}
+            {% case ridx %}{% when 5 %}{% assign ridx = 1 %}{% when 6 %}{% assign ridx = 2 %}{% endcase %}
             {% assign placeholder_image = 'product-apparel-' | append: ridx %}
             {% render 'card-product',
-              show_vendor: section.settings.show_vendor,
               media_aspect_ratio: section.settings.image_ratio,
               image_shape: section.settings.image_shape,
+              show_vendor: section.settings.show_vendor,
               lazy_load: false,
               placeholder_image: placeholder_image %}
           </li>
@@ -76,8 +64,8 @@ Featured collection (safe): falls back if no collection is selected or empty, an
 {% schema %}
 {
   "name": "Featured collection (safe)",
-  "class": "section",
   "tag": "section",
+  "class": "section",
   "settings": [
     { "type": "inline_richtext", "id": "title", "label": "Heading" },
     { "type": "collection", "id": "collection", "label": "Collection" },
@@ -94,12 +82,7 @@ Featured collection (safe): falls back if no collection is selected or empty, an
     { "type": "select", "id": "image_shape", "label": "Image shape",
       "options": [{"value":"default","label":"Default"},{"value":"arch","label":"Arch"}],
       "default": "default" },
-    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
-    { "type": "checkbox", "id": "show_view_all", "label": "Show view all", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "select", "id": "heading_size", "label": "Heading size",
-      "options": [{"value":"h2","label":"H2"},{"value":"h1","label":"H1"},{"value":"h0","label":"Display"}],
-      "default": "h1" }
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false }
   ],
   "presets": [{ "name": "Featured collection (safe)" }]
 }
