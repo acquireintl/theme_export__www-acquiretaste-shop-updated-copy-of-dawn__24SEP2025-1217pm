@@ -21,7 +21,7 @@
       "block_order": ["usp1", "usp2", "usp3"]
     },
     "featured": {
-      "type": "featured-collection-safe",
+      "type": "featured-collection",
       "settings": {
         "title": "Featured",
         "show_view_all": true,
