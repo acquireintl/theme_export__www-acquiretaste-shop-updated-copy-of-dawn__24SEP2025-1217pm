@@ -6,7 +6,7 @@
     },
     "feat": {
       "type": "featured-collection",
-      "settings": { "title": "Featured", "show_view_all": true, "columns_desktop": "4", "columns_mobile": "2" }
+      "settings": { "title": "Featured", "show_view_all": true }
     }
   },
   "order": ["hero", "feat"]
