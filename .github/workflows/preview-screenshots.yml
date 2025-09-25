@@ -1,0 +1,29 @@
+name: Preview Screenshots
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  snap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: |
+          npm i
+          npx playwright install --with-deps
+      - env:
+          PREVIEW_URL: ${{ secrets.PREVIEW_URL }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          COLLECTION_URL: ${{ secrets.COLLECTION_URL }}
+          PRODUCT_URL: ${{ secrets.PRODUCT_URL }}
+        run: |
+          npm run snap
+          ls -la preview_*.png || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: theme-preview-screenshots
+          path: preview_*.png
+          if-no-files-found: warn
