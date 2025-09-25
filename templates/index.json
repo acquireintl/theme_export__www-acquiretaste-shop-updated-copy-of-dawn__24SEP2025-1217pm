@@ -47,10 +47,41 @@
         "heading": "Luxury streetwear, built to last",
         "subheading": "Elevated fabrics, precise fits, made for everyday wear.",
         "cta_label": "Shop the collection",
+<<<<<<< HEAD
+        "cta_link": "/collections/all",
+        "overlay_opacity": 25
+      }
+    },
+    "usp": {
+      "type": "usp-strip",
+      "blocks": {
+        "usp1": { "type": "usp", "settings": { "title": "High-quality materials", "text": "Soft hand, lasting shape." } },
+        "usp2": { "type": "usp", "settings": { "title": "Great customer service", "text": "Real humans. Fast replies." } },
+        "usp3": { "type": "usp", "settings": { "title": "Fast shipping", "text": "Quick processing from the U.S." } }
+      },
+      "block_order": ["usp1", "usp2", "usp3"]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured",
+        "show_view_all": true,
+        "columns_desktop": "4",
+        "columns_mobile": "2"
+      }
+    },
+    "igcta": {
+      "type": "instagram-cta",
+      "settings": {
+        "heading": "Follow us on Instagram",
+        "button_label": "@acquireintl",
+        "url": "https://instagram.com/acquireintl"
+=======
         "cta_link": "shopify://collections/all",
         "overlay_opacity": 20,
         "text_color": "#ffffff",
         "color_scheme": ""
+>>>>>>> origin/main
       }
     }
   },
