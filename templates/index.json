@@ -1,92 +1,13 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "featured_collection": {
+    "hero": {
+      "type": "simple-fallback",
+      "settings": { "heading": "New Arrivals", "cta_label": "Shop now", "cta_link": "/collections/all" }
+    },
+    "feat": {
       "type": "featured-collection",
-      "disabled": true,
-      "settings": {
-        "collection": "shop",
-        "products_to_show": 25,
-        "title": "",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "subtitle",
-        "columns_desktop": 5,
-        "enable_desktop_slider": false,
-        "full_width": true,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "background-1",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "lux_hero_J4ce8r": {
-      "type": "lux-hero",
-      "name": "Luxe hero",
-      "settings": {
-        "image": "shopify://shop_images/DSC08305_662faa66-34d5-474c-92c0-4dcc96c5d124.jpg",
-        "eyebrow": "AcquireTaste",
-        "heading": "Luxury streetwear, built to last",
-        "subheading": "Elevated fabrics, precise fits, made for everyday wear.",
-        "cta_label": "Shop the collection",
-<<<<<<< HEAD
-        "cta_link": "/collections/all",
-        "overlay_opacity": 25
-      }
-    },
-    "usp": {
-      "type": "usp-strip",
-      "blocks": {
-        "usp1": { "type": "usp", "settings": { "title": "High-quality materials", "text": "Soft hand, lasting shape." } },
-        "usp2": { "type": "usp", "settings": { "title": "Great customer service", "text": "Real humans. Fast replies." } },
-        "usp3": { "type": "usp", "settings": { "title": "Fast shipping", "text": "Quick processing from the U.S." } }
-      },
-      "block_order": ["usp1", "usp2", "usp3"]
-    },
-    "featured": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured",
-        "show_view_all": true,
-        "columns_desktop": "4",
-        "columns_mobile": "2"
-      }
-    },
-    "igcta": {
-      "type": "instagram-cta",
-      "settings": {
-        "heading": "Follow us on Instagram",
-        "button_label": "@acquireintl",
-        "url": "https://instagram.com/acquireintl"
-=======
-        "cta_link": "shopify://collections/all",
-        "overlay_opacity": 20,
-        "text_color": "#ffffff",
-        "color_scheme": ""
->>>>>>> origin/main
-      }
+      "settings": { "title": "Featured", "show_view_all": true, "columns_desktop": "4", "columns_mobile": "2" }
     }
   },
-  "order": [
-    "featured_collection",
-    "lux_hero_J4ce8r"
-  ]
+  "order": ["hero", "feat"]
 }
