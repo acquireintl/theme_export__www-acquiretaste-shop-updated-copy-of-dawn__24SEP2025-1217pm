@@ -1,0 +1,11 @@
+{
+  "name": "theme-preview-snapshots",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "snap": "node tools/snap.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.46.0"
+  }
+}
