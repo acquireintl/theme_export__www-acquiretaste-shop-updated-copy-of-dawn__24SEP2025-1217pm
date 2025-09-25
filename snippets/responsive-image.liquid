@@ -1,0 +1,26 @@
+{%- comment -%}
+Reusable responsive image
+Usage:
+  {% render 'responsive-image',
+     image: my_image_object,
+     alt: 'Alt text',
+     widths: '320,480,750,1100,1500,2000',
+     sizes: '100vw',
+     class: ''
+  %}
+{%- endcomment -%}
+{%- assign _img = image -%}
+{%- assign _alt = alt | default: '' -%}
+{%- assign _widths = widths | default: '320,480,640,750,900,1100,1300,1500,1800,2000' -%}
+{%- assign _sizes = sizes | default: '100vw' -%}
+{%- assign _class = class | default: '' -%}
+{%- if _img != blank -%}
+  {{ _img
+     | image_url: width: 2000
+     | image_tag: loading: 'lazy',
+                  decoding: 'async',
+                  widths: _widths,
+                  sizes: _sizes,
+                  alt: _alt,
+                  class: _class }}
+{%- endif -%}

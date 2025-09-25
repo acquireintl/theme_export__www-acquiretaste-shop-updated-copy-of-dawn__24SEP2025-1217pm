@@ -1,4 +1,4 @@
-{% comment %} About — Modular (Luxury v2) {% endcomment %}
+{% comment %} About — Modular (Luxe, responsive images) {% endcomment %}
 <section class="color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
     {% for block in section.blocks %}
@@ -17,19 +17,27 @@
             <div>
               {% assign img_d = block.settings.image_desktop %}
               {% assign img_m = block.settings.image_mobile | default: img_d %}
+              {% if img_m != blank %}
+                {% render 'responsive-image',
+                  image: img_m,
+                  alt: block.settings.heading,
+                  widths: '750,1100,1500,2200',
+                  sizes: '(max-width: 749px) 100vw, 0vw',
+                  class: '' %}
+              {% endif %}
               {% if img_d != blank %}
-                <picture>
-                  {% if img_m != blank %}
-                    <source media="(max-width: 749px)" srcset="{{ img_m | image_url: width: 750 }}">
-                  {% endif %}
-                  {{ img_d | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '750,1100,1500,2200', alt: block.settings.heading }}
-                </picture>
+                {% render 'responsive-image',
+                  image: img_d,
+                  alt: block.settings.heading,
+                  widths: '750,1100,1500,2200',
+                  sizes: '(min-width: 750px) 45vw, 100vw',
+                  class: '' %}
               {% endif %}
             </div>
           </div>
 
         {% when 'story' %}
-          <div class="rte" style="max-width: 72ch; margin: 0 auto;">
+          <div class="rte" style="max-width:72ch;margin:0 auto;">
             {{ block.settings.body }}
           </div>
 
@@ -46,7 +54,12 @@
                 <div class="card" style="padding:1.25rem;">
                   {% if icon != blank %}
                     <div class="media" style="margin-bottom:.75rem;">
-                      {{ icon | image_url: width: 256 | image_tag: loading: 'lazy', widths: '128,192,256', alt: title }}
+                      {% render 'responsive-image',
+                        image: icon,
+                        alt: title,
+                        widths: '64,96,128,192,256',
+                        sizes: '128px',
+                        class: '' %}
                     </div>
                   {% endif %}
                   {% if title != blank %}<h3 class="h3" style="margin-bottom:.25rem;">{{ title }}</h3>{% endif %}
@@ -71,7 +84,12 @@
                 {% assign g = block.settings[gkey] %}
                 {% if g != blank %}
                   <div class="media">
-                    {{ g | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '550,750,1100,1500', alt: block.settings.gallery_alt }}
+                    {% render 'responsive-image',
+                      image: g,
+                      alt: block.settings.gallery_alt,
+                      widths: '550,750,1100,1500,2000',
+                      sizes: '(min-width: 990px) 33vw, 100vw',
+                      class: '' %}
                   </div>
                 {% endif %}
               {% endfor %}
@@ -154,6 +172,8 @@
       ]
     }
   ],
-  "presets": [{ "name": "About — modular (Luxe)" }]
+  "presets": [
+    { "name": "About — modular (Luxe)" }
+  ]
 }
 {% endschema %}
