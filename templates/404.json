@@ -9,28 +9,115 @@
  */
 {
   "sections": {
+    "featured_collection_FDUUhC": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "shop",
+        "products_to_show": 25,
+        "title": "",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 5,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_KD8Rbi": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_GHwqqe": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "acquire-hoodies"
+          }
+        },
+        "featured_collection_NGxemX": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "acquiretaste-marble-wax-set"
+          }
+        },
+        "featured_collection_TbtiVE": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "acquire-deset-camo-set"
+          }
+        },
+        "featured_collection_CYGTmP": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "acquire-taste-fortune-track-suits"
+          }
+        },
+        "featured_collection_gcPD4t": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "acq-men-track-suit"
+          }
+        },
+        "featured_collection_3QgRRg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "acquiretaste-tees"
+          }
+        },
+        "featured_collection_UU4D4G": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "never-die-set"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_GHwqqe",
+        "featured_collection_NGxemX",
+        "featured_collection_TbtiVE",
+        "featured_collection_CYGTmP",
+        "featured_collection_gcPD4t",
+        "featured_collection_3QgRRg",
+        "featured_collection_UU4D4G"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 5,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "main": {
       "type": "main-404",
       "disabled": true,
       "settings": {
-        "back_collection": ""
-      }
-    },
-    "simple_fallback_iK6qr6": {
-      "type": "simple-fallback",
-      "name": "Simple fallback",
-      "settings": {
-        "heading": "",
-        "subheading": "",
-        "cta_label": "",
-        "cta_link": "",
-        "heading_size": "h1",
-        "color_scheme": ""
+        "back_collection": "shop"
       }
     }
   },
   "order": [
-    "main",
-    "simple_fallback_iK6qr6"
+    "featured_collection_FDUUhC",
+    "collection_list_KD8Rbi",
+    "main"
   ]
 }
