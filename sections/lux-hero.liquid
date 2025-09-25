@@ -1,0 +1,41 @@
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="relative" style="isolation:isolate">
+    {% if section.settings.image != blank %}
+      <div class="media" style="position:relative;overflow:hidden;max-height:72vh;">
+        {{ section.settings.image | image_url: width: 2200 | image_tag: loading: 'lazy', sizes: '100vw', widths: '750,1100,1500,1800,2200', alt: section.settings.heading }}
+        {% if section.settings.overlay_opacity > 0 %}
+          <div style="position:absolute;inset:0;background-color:#000;opacity:{{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="page-width" style="position:absolute;inset:0;display:flex;align-items:center;">
+      <div class="prose" style="max-width: 56rem; color: {{ section.settings.text_color }};">
+        {% if section.settings.eyebrow != blank %}<p class="eyebrow" style="letter-spacing:.08em;opacity:.9">{{ section.settings.eyebrow }}</p>{% endif %}
+        {% if section.settings.heading != blank %}<h1 class="title h0" style="line-height:1.0">{{ section.settings.heading }}</h1>{% endif %}
+        {% if section.settings.subheading != blank %}<p class="subtitle" style="max-width: 60ch; opacity:.92">{{ section.settings.subheading }}</p>{% endif %}
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <a class="button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Luxe hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "AcquireTaste" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Luxury streetwear, built to last" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Elevated fabrics, precise fits, made for everyday wear." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop the collection" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "default": "/collections/all" },
+    { "type": "range", "id": "overlay_opacity", "label": "Image dark overlay (%)", "min": 0, "max": 80, "step": 5, "default": 20 },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colors", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "Luxe hero" }]
+}
+{% endschema %}
