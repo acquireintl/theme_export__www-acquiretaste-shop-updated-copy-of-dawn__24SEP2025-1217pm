@@ -1,0 +1,43 @@
+name: Apply Patch to shopify-dev
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: Commit message
+        required: true
+      files_json:
+        description: Raw JSON array: [{ "path": "templates/index.json", "content": "<file contents>" }, ...]
+        required: true
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: shopify-dev }
+      - name: Save payload
+        run: |
+          echo '${{ inputs.files_json }}' > /tmp/files.json
+          cat /tmp/files.json
+      - name: Write files from JSON
+        run: |
+          node - <<'NODE'
+          const fs = require('fs'), path = require('path');
+          const files = JSON.parse(fs.readFileSync('/tmp/files.json','utf8'));
+          for (const f of files) {
+            const p = f.path;
+            const dir = path.dirname(p);
+            fs.mkdirSync(dir, { recursive: true });
+            fs.writeFileSync(p, f.content, 'utf8');
+            console.log('Wrote', p);
+          }
+          NODE
+      - name: Commit
+        run: |
+          git config user.name  "jmee09-bot"
+          git config user.email "bot@example.com"
+          git add -A
+          git commit -m "${{ inputs.message }}" || echo "No changes"
+      - name: Push
+        run: git push origin HEAD:shopify-dev
