@@ -6,7 +6,7 @@ on:
         description: "Commit message"
         required: true
       files_json:
-        description: "Raw JSON array: [{ \"path\": \"templates/index.json\", \"content\": \"...\" }, ...]"
+        description: "Raw JSON array of objects with path and content"
         required: true
 
 permissions:
