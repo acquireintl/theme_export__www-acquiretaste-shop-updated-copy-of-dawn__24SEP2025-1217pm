@@ -3,23 +3,29 @@ on:
   workflow_dispatch:
     inputs:
       message:
-        description: Commit message
+        description: "Commit message"
         required: true
       files_json:
-        description: Raw JSON array: [{ "path": "templates/index.json", "content": "<file contents>" }, ...]
+        description: "Raw JSON array: [{ \"path\": \"templates/index.json\", \"content\": \"...\" }, ...]"
         required: true
+
 permissions:
   contents: write
+
 jobs:
   apply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: { ref: shopify-dev }
+        with:
+          ref: shopify-dev
+
       - name: Save payload
         run: |
           echo '${{ inputs.files_json }}' > /tmp/files.json
-          cat /tmp/files.json
+          # Validate JSON just in case
+          jq . /tmp/files.json >/dev/null 2>&1 || { echo "Invalid JSON in files_json"; cat /tmp/files.json; exit 1; }
+
       - name: Write files from JSON
         run: |
           node - <<'NODE'
@@ -33,11 +39,13 @@ jobs:
             console.log('Wrote', p);
           }
           NODE
+
       - name: Commit
         run: |
           git config user.name  "jmee09-bot"
           git config user.email "bot@example.com"
           git add -A
           git commit -m "${{ inputs.message }}" || echo "No changes"
+
       - name: Push
         run: git push origin HEAD:shopify-dev
