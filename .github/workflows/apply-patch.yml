@@ -16,15 +16,14 @@ jobs:
   apply:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout shopify-dev
+        uses: actions/checkout@v4
         with:
           ref: shopify-dev
 
       - name: Save payload
         run: |
           echo '${{ inputs.files_json }}' > /tmp/files.json
-          # Validate JSON just in case
-          jq . /tmp/files.json >/dev/null 2>&1 || { echo "Invalid JSON in files_json"; cat /tmp/files.json; exit 1; }
 
       - name: Write files from JSON
         run: |
