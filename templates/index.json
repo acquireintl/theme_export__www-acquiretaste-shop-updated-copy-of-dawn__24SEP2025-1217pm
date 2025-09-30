@@ -15,25 +15,25 @@
         "heading_TV7fXx": {
           "type": "heading",
           "settings": {
-            "heading": "Elevate Your Streetwear Style",
-            "heading_size": "h1"
+            "heading": "Elevate Your Streetswear Style",
+            "heading_size": "hxxl"
           }
         },
         "text_neirrf": {
           "type": "text",
           "settings": {
             "text": "Free shipping on orders over $100 + hassle-free returns",
-            "text_style": "body"
+            "text_style": "subtitle"
           }
         },
         "buttons_iFXT3b": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop New Arrivals",
-            "button_link_1": "",
+            "button_label_1": "New Arrivals",
+            "button_link_1": "shopify://collections/shop",
             "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
+            "button_label_2": "Matching Sets",
+            "button_link_2": "shopify://collections",
             "button_style_secondary_2": false
           }
         }
@@ -49,10 +49,10 @@
         "image_overlay_opacity": 0,
         "image_height": "adapt",
         "image_behavior": "ambient",
-        "desktop_content_position": "middle-center",
+        "desktop_content_position": "bottom-right",
         "desktop_content_alignment": "center",
         "show_text_box": true,
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
         "show_text_below": true
